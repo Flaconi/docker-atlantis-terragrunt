@@ -1,7 +1,10 @@
 name: Publish Docker
-on: [push]
+on: 
+  push: {}
+  schedule:
+    - cron:  '0 0 * * *'
 jobs:
-  build:
+  build-publish:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
