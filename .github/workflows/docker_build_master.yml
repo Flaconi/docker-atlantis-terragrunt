@@ -1,0 +1,20 @@
+name: Publish Docker on master
+on: 
+  push:
+    branches:
+      - master
+  schedule:
+    - cron:  '0 0 1 * *'
+jobs:
+  build-publish:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+      with:
+        ref: ${{ github.ref }}
+    - name: Publish to Registry
+      uses: flaconi/Publish-Docker-Github-Action@master
+      with:
+        name: flaconi/atlantis-terragrunt
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
