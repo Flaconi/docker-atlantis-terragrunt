@@ -4,7 +4,7 @@ RUN apk add unzip make curl
 
 # TODO: verify GPG
 ARG TERRAGRUNT_VERSION='0.21.7'
-ARG DEFAULT_TERRAFORM_VERSION=0.12.29
+ENV DEFAULT_TERRAFORM_VERSION=0.12.29
 
 RUN  \
   rm -rf /usr/local/bin/terraform \
