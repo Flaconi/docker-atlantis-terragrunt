@@ -21,35 +21,17 @@ jobs:
       - name: Set Variables
         id: vars
         run:  |
-          d=$(date +%Y-%m-%d)
-          tag=$d-${{ matrix.TF_VERSION }}-${{ matrix.TG_VERSION }}
+          if [ "${{ matrix.TF_VERSION }}" == "latest" ] && [ "${{ matrix.TG_VERSION }}" == "latest" ]; then
+            tag="latest"
+          else
+            tag=${{ matrix.TF_VERSION }}-${{ matrix.TG_VERSION }}
+          fi
           echo ::set-env name=TAG::${tag}
-        #$(echo ${{ matrix.TF_VERSION }}-${{ matrix.TG_VERSION }})
         # with:
         #   ref: ${{ github.ref }}
       - name: Build an Publish
         run: |
           make build TF_VERSION=${{ matrix.TF_VERSION }} TG_VERSION=${{ matrix.TG_VERSION }}
-
-
-        # make tag TAG=${{ env.TAG }}
-        # make login DOCKER_USER=${{ secrets.DOCKER_USERNAME }} DOCKER_PASS=${{ secrets.DOCKER_PASSWORD }}
-        # make push TAG=${{ env.TAG }}
-
-      # - name: Publish to Registry
-      #   uses: docker/build-push-action@v1
-      #   with:
-      #     name: runderwood/atlantis-terragrunt
-      #     username: ${{ secrets.DOCKER_USERNAME }}
-      #     password: ${{ secrets.DOCKER_PASSWORD }}
-      #     build_args: DEFAULT_TERRAFORM_VERSION=${{ matrix.TF_VERSION }},TERRAGRUNT_VERSION=${{ matrix.TG_VERSION }}
-      #     tags: "latest, ${{ env.RELEASE_VERSION }}"
-
-      # - name: Publish to Registry
-      #   uses: elgohr/Publish-Docker-Github-Action@master
-      #   with:
-      #     name: runderwood/atlantis-terragrunt
-      #     username: ${{ secrets.DOCKER_USERNAME }}
-      #     password: ${{ secrets.DOCKER_PASSWORD }}
-      #     tag_semver: true
-      #     tags: "latest, ${{ env.RELEASE_VERSION }}"
+          make tag TAG=${{ env.TAG }}
+          make login DOCKER_USER=${{ secrets.DOCKER_USERNAME }} DOCKER_PASS=${{ secrets.DOCKER_PASSWORD }}
+          make push TAG=${{ env.TAG }}
