@@ -1,14 +1,21 @@
+ifneq (,)
+.error This Makefile requires GNU Make.
+endif
+
+.PHONY: build rebuild pull tag login push enter
+
 DIR = .
 FILE = Dockerfile
-IMAGE = "flaconi/atlantis-terragrunt"
-TAG = test
-
+IMAGE = "runderwood/atlantis-terragrunt"
+TAG = latest
+TF_VERSION = '0.12.29'
+TG_VERSION = '0.21.7'
 
 pull:
 	docker pull $(shell grep FROM Dockerfile | sed 's/^FROM//g';)
 
 build:
-	docker build -t $(IMAGE) -f $(DIR)/$(FILE) $(DIR)
+	docker build --build-arg DEFAULT_TERRAFORM_VERSION=$(TF_VERSION) --build-arg TERRAGRUNT_VERSION=$(TG_VERSION) -t $(IMAGE) -f $(DIR)/$(FILE) $(DIR)
 
 rebuild: pull
 	docker build --no-cache -t $(IMAGE) -f $(DIR)/$(FILE) $(DIR)
