@@ -17,7 +17,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@master
-
+        with:
+          ref: ${{ github.ref }}
       - name: Set Variables
         id: vars
         run:  |
@@ -27,8 +28,6 @@ jobs:
             tag=${{ matrix.TF_VERSION }}-${{ matrix.TG_VERSION }}
           fi
           echo ::set-env name=TAG::${tag}
-        with:
-          ref: ${{ github.ref }}
       - name: Build an Publish
         run: |
           make build TF_VERSION=${{ matrix.TF_VERSION }} TG_VERSION=${{ matrix.TG_VERSION }}
