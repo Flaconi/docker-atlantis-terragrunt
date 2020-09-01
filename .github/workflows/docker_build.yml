@@ -28,7 +28,7 @@ jobs:
             tag=${{ matrix.TF_VERSION }}-${{ matrix.TG_VERSION }}
           fi
           echo ::set-env name=TAG::${tag}
-      - name: Build an Publish
+      - name: build-publish
         run: |
           make build TF_VERSION=${{ matrix.TF_VERSION }} TG_VERSION=${{ matrix.TG_VERSION }}
           make tag TAG=${{ env.TAG }}
