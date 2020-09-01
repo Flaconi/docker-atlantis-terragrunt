@@ -3,13 +3,10 @@ FROM runatlantis/atlantis:latest
 RUN apk add unzip make curl
 
 # TODO: verify GPG
-ARG TERRAGRUNT_VERSION='0.21.7'
-<<<<<<< HEAD
+ARG TERRAGRUNT_VERSION=0.21.7
+ENV TERRAGRUNT_VERSION=$TERRAGRUNT_VERSION
 ARG DEFAULT_TERRAFORM_VERSION=0.12.29
 ENV DEFAULT_TERRAFORM_VERSION=$DEFAULT_TERRAFORM_VERSION
-=======
-ARG DEFAULT_TERRAFORM_VERSION='0.12.29'
->>>>>>> OPS-3673 Adding changes
 
 RUN set -eux \
     && if [ "${DEFAULT_TERRAFORM_VERSION}" = "latest" ]; then \
@@ -20,7 +17,7 @@ RUN set -eux \
                   | sort -V \
                   | tail -1 )"; \
     else \
-        VERSION=${DEFAULT_TERRAFORM_VERSION}; \
+        VERSION=$DEFAULT_TERRAFORM_VERSION; \
     fi \
     # else \
     #     VERSION=${DEFAULT_TERRAFORM_VERSION} \
@@ -29,16 +26,16 @@ RUN set -eux \
     && ln -s /usr/local/bin/tf/versions/${VERSION}/terraform /usr/local/bin/terraform
 
 RUN set -eux \
-    && if [ "$(TERRAGRUNT_VERSION)" = "latest" ]; then \
+    && if [ "${TERRAGRUNT_VERSION}" = "latest" ]; then \
             VERSION="$( curl -L -sS https://github.com/gruntwork-io/terragrunt/releases \
                     | tac | tac \
                     | grep -Eo '/v[.0-9]+/' \
-                    | grep -Eo 'v[.0-9]+' \
+                    | grep -Eo '[.0-9]+' \
                     | sort -u \
                     | sort -V \
                     | tail -1 )"; \
     else \
-        VERSION=${TERRAGRUNT_VERSION}; \
+        VERSION=$TERRAGRUNT_VERSION; \
     fi \
     # Download the binary and checksum
     && curl -OLSs "https://github.com/gruntwork-io/terragrunt/releases/download/v${VERSION}/terragrunt_linux_amd64" \
