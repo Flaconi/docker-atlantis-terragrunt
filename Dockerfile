@@ -17,7 +17,12 @@ RUN set -eux \
                   | sort -V \
                   | tail -1 )"; \
     else \
-        DEFAULT_TERRAFORM_VERSION=$TERRAFORM_VERSION; \
+        DEFAULT_TERRAFORM_VERSION="$( curl -sS https://releases.hashicorp.com/terraform/ \
+			| tac | tac \
+			| grep -Eo "/${TERRAFORM_VERSION}\.[.0-9]+/" \
+			| grep -Eo '[.0-9]+' \
+			| sort -V \
+			| tail -1 )"; \
     fi \
     && rm -rf /usr/local/bin/terraform \
     && ln -s /usr/local/bin/tf/versions/${DEFAULT_TERRAFORM_VERSION}/terraform /usr/local/bin/terraform
@@ -31,8 +36,14 @@ RUN set -eux \
                   | sort -u \
                   | sort -V \
                   | tail -1 )"; \
-    else \
+    elif [ "${TERRAGRUNT_VERSION}" = "0.21.7" ]; then \
         DEFAULT_TERRAGRUNT_VERSION=$TERRAGRUNT_VERSION; \
+    else \
+        git clone https://github.com/gruntwork-io/terragrunt /terragrunt; \
+        cd /terragrunt; \
+        DEFAULT_TERRAGRUNT_VERSION="$( git tag | grep -E "v${TERRAGRUNT_VERSION}\.[.0-9]+" | grep -Eo '[.0-9]+' | sort -u | sort -V | tail -1 )"; \
+        cd ..; \
+        rm -fr terragrunt; \
     fi \
     # Download the binary and checksum
     && curl -OLSs "https://github.com/gruntwork-io/terragrunt/releases/download/v${DEFAULT_TERRAGRUNT_VERSION}/terragrunt_linux_amd64" \
