@@ -1,18 +1,59 @@
-name: Publish Docker
-on: 
+# -------------------------------------------------------------------------------------------------
+# Job Name
+# -------------------------------------------------------------------------------------------------
+name: Build-Publish
+
+# -------------------------------------------------------------------------------------------------
+# When to run
+# -------------------------------------------------------------------------------------------------
+on:
   push: {}
   schedule:
     - cron:  '0 0 * * *'
+
+# -------------------------------------------------------------------------------------------------
+# What to run
+# -------------------------------------------------------------------------------------------------
 jobs:
   build-publish:
+    name:  "[ ${{ matrix.TF_VERSION }}-${{ matrix.TG_VERSION }} ]"
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: False
+      matrix:
+        TF_VERSION: [0.12,0.13,latest]
+        TG_VERSION: [0.21,0.21.7,0.22,latest]
+        exclude:
+          - { TF_VERSION: latest, TG_VERSION: 0.21.7 }
+          - { TF_VERSION: 0.13,   TG_VERSION: 0.21.7 }
     steps:
-    - uses: actions/checkout@master
-      with:
-        ref: ${{ github.ref }}
-    - name: Publish to Registry
-      uses: flaconi/Publish-Docker-Github-Action@master
-      with:
-        name: flaconi/atlantis-terragrunt
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+      # ------------------------------------------------------------
+      # Checkout repository
+      # ------------------------------------------------------------
+      - name: Checkout repository
+        uses: actions/checkout@master
+        with:
+          ref: ${{ github.ref }}
+
+      # ------------------------------------------------------------
+      # Set Variables
+      # ------------------------------------------------------------
+      - name: Set Variables
+        id: vars
+        run:  |
+          if [ "${{ matrix.TF_VERSION }}" == "latest" ] && [ "${{ matrix.TG_VERSION }}" == "latest" ]; then
+            tag="latest"
+          else
+            tag=${{ matrix.TF_VERSION }}-${{ matrix.TG_VERSION }}
+          fi
+          echo ::set-env name=TAG::${tag}
+
+      # ------------------------------------------------------------
+      # Build Images
+      # ------------------------------------------------------------
+      - name: Build and Publish
+        run: |
+          make build TF_VERSION=${{ matrix.TF_VERSION }} TG_VERSION=${{ matrix.TG_VERSION }}
+          make tag TAG=${{ env.TAG }}
+          make login DOCKER_USER=${{ secrets.DOCKER_USERNAME }} DOCKER_PASS=${{ secrets.DOCKER_PASSWORD }}
+          make push TAG=${{ env.TAG }}
