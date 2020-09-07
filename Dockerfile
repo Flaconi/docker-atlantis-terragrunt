@@ -36,8 +36,6 @@ RUN set -eux \
                   | sort -u \
                   | sort -V \
                   | tail -1 )"; \
-    elif [ "${TERRAGRUNT_VERSION}" = "0.21.7" ]; then \
-        DEFAULT_TERRAGRUNT_VERSION=$TERRAGRUNT_VERSION; \
     else \
         git clone https://github.com/gruntwork-io/terragrunt /terragrunt; \
         cd /terragrunt; \
