@@ -1,7 +1,7 @@
 FROM runatlantis/atlantis:latest
 
 RUN apk add unzip make curl
-RUN chown atlantis:atlantis /home/atlantis/ -R
+
 # TODO: verify GPG
 ARG TERRAGRUNT_VERSION=0.21
 ENV DEFAULT_TERRAGRUNT_VERSION=$TERRAGRUNT_VERSION
@@ -61,3 +61,7 @@ ADD docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 ADD create_github_user_ssh_key.sh /usr/local/bin/create_github_user_ssh_key.sh
 
 RUN chown atlantis:atlantis /home/atlantis/ -R
+RUN ls -la /
+RUN ls -la /mnt
+RUN whoami
+RUN mount
