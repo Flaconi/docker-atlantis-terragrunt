@@ -60,8 +60,5 @@ RUN mv /usr/local/bin/docker-entrypoint.sh /usr/local/bin/docker-entrypoint-orig
 ADD docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 ADD create_github_user_ssh_key.sh /usr/local/bin/create_github_user_ssh_key.sh
 
-RUN chown atlantis:atlantis /home/atlantis/ -R
-RUN ls -la /
-RUN ls -la /mnt
-RUN whoami
-RUN mount
+RUN mkdir /mnt/efs \
+    && chown atlantis:atlantis /mnt/efs/ -R 
