@@ -50,7 +50,7 @@ jobs:
           else
             tag=${{ matrix.TF_VERSION }}-${{ matrix.TG_VERSION }}
           fi
-          echo ::set-env name=TAG::${tag}
+          echo "TAG=${tag}" >> $GITHUB_ENV
 
       # ------------------------------------------------------------
       # Build Images
