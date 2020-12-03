@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/Flaconi/docker-atlantis-terragrunt.svg?branch=master)](https://travis-ci.com/Flaconi/docker-atlantis-terragrunt)
+[![Build Status](https://github.com/Flaconi/docker-atlantis-terragrunt/workflows/Build-Publish/badge.svg)](https://github.com/Flaconi/docker-atlantis-terragrunt/actions?query=workflow%3ABuild-Publish)
 [![Dockerhub](https://img.shields.io/badge/dockerhub-python-blue.svg)](https://hub.docker.com/r/flaconi/atlantis-terragrunt)
 
 # Docker image for Atlantis with Terragrunt implementation
