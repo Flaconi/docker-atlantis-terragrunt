@@ -1,6 +1,10 @@
 FROM runatlantis/atlantis:latest
 
-RUN apk add unzip make curl
+RUN apk add \
+	aws-cli \
+	curl \
+	make \
+	unzip
 
 # TODO: verify GPG
 ARG TERRAGRUNT_VERSION=0.21
