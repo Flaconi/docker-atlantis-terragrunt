@@ -1,4 +1,4 @@
-FROM runatlantis/atlantis:latest
+FROM runatlantis/atlantis:v0.16.1
 
 RUN apk add \
 	aws-cli \
