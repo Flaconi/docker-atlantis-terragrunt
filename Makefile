@@ -9,7 +9,7 @@ FILE = Dockerfile
 IMAGE = "flaconi/atlantis-terragrunt"
 TAG = latest
 TF_VERSION = '0.12'
-TG_VERSION = '0.21'
+TG_VERSION = '0.25'
 
 pull:
 	docker pull $(shell grep FROM Dockerfile | sed 's/^FROM//g';)
