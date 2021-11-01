@@ -13,6 +13,7 @@ TAG = latest
 ATLANTIS = '0.17.4'
 TERRAFORM = '1.0.8'
 TERRAGRUNT = '0.34.1'
+TERRAGRUNT_ATLANTIS_CONFIG = '1.9.2'
 
 pull:
 	docker pull $(shell grep FROM Dockerfile | sed 's/^FROM//g' | sed "s/\$${ATLANTIS}/$(ATLANTIS)/g";)
@@ -22,12 +23,14 @@ build:
 		--build-arg ATLANTIS=$(ATLANTIS) \
 		--build-arg TERRAFORM=$(TERRAFORM) \
 		--build-arg TERRAGRUNT=$(TERRAGRUNT) \
+		--build-arg TERRAGRUNT_ATLANTIS_CONFIG=$(TERRAGRUNT_ATLANTIS_CONFIG) \
 		-t $(IMAGE) -f $(DIR)/$(FILE) $(DIR)
 
 test:
 	docker run --rm ${IMAGE} atlantis version | grep -E '$(ATLANTIS)$$'
 	docker run --rm ${IMAGE} terraform --version | grep -E 'v$(TERRAFORM)$$'
 	docker run --rm ${IMAGE} terragrunt --version | grep -E 'v$(TERRAGRUNT)$$'
+	docker run --rm ${IMAGE} terragrunt-atlantis-config version | grep -E "$(TERRAGRUNT_ATLANTIS_CONFIG)$$"
 
 tag:
 	docker tag $(IMAGE) $(IMAGE):$(TAG)

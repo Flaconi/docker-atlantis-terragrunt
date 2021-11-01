@@ -16,12 +16,14 @@ For building you can overwrite your desired versions with the following three Ma
 * `ATLANTIS`
 * `TERRAFORM`
 * `TERRAGRUNT`
+* `TERRAGRUNT_ATLANTIS_CONFIG`
 
 ```
 make build
 make build TERRAFORM=1.0.8
 make build TERRAFORM=1.0.8 TERRAGRUNT=0.34.1
 make build TERRAFORM=1.0.8 TERRAGRUNT=0.34.1 ATLANTIS=0.17.4
+make build TERRAFORM=1.0.8 TERRAGRUNT=0.34.1 ATLANTIS=0.17.4 TERRAGRUNT_ATLANTIS_CONFIG=1.9.2
 ```
 
 ## Available images
