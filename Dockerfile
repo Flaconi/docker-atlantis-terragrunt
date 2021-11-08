@@ -9,6 +9,7 @@ RUN apk add \
 
 ARG TERRAGRUNT
 ARG TERRAFORM
+ARG TERRAGRUNT_ATLANTIS_CONFIG
 
 ###
 ### Ensure Terraform version is present, linked and validated
@@ -52,6 +53,17 @@ RUN set -eux \
 	&& curl -L -sS "https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT}/terragrunt_linux_amd64" -o /usr/local/bin/terragrunt \
 	&& chmod +x /usr/local/bin/terragrunt \
 	&& terragrunt --version | grep "v${TERRAGRUNT}"
+
+###
+### Ensure the Terragrunt Atlantis Config is present
+###
+ADD https://github.com/transcend-io/terragrunt-atlantis-config/releases/download/v${TERRAGRUNT_ATLANTIS_CONFIG}/terragrunt-atlantis-config_${TERRAGRUNT_ATLANTIS_CONFIG}_linux_amd64.tar.gz /usr/local/bin/
+RUN set -eux \
+	&& cd /usr/local/bin \
+	&& tar xvzf terragrunt-atlantis-config_${TERRAGRUNT_ATLANTIS_CONFIG}_linux_amd64.tar.gz \
+	&& mv terragrunt-atlantis-config_${TERRAGRUNT_ATLANTIS_CONFIG}_linux_amd64/terragrunt-atlantis-config_${TERRAGRUNT_ATLANTIS_CONFIG}_linux_amd64 terragrunt-atlantis-config \
+	&& chmod +x terragrunt-atlantis-config \
+	&& rm -rf terragrunt-atlantis-config_${TERRAGRUNT_ATLANTIS_CONFIG}_linux_amd64*
 
 ###
 ### Flaconi customized entrypoint
