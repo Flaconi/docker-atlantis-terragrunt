@@ -24,18 +24,18 @@ jobs:
       fail-fast: false
       matrix:
         ATLANTIS:
-          - 0.18.2
+          - 0.18.3
         TF_TG:
           # Terraform 1.1.x
-          - 'TF-1.1.4    TG-0.36.0'
+          - 'TF-1.1.6    TG-0.36.2'
           # Terraform 1.0.x
-          - 'TF-1.0.11    TG-0.36.0'
+          - 'TF-1.0.11    TG-0.36.2'
           # Terraform 0.15.x
-          - 'TF-0.15.5   TG-0.36.0'
+          - 'TF-0.15.5   TG-0.36.2'
           # Terraform 0.14.x
-          - 'TF-0.14.11  TG-0.36.0'
+          - 'TF-0.14.11  TG-0.36.2'
           # Terraform 0.13.x
-          - 'TF-0.13.7   TG-0.36.0'
+          - 'TF-0.13.7   TG-0.36.2'
           # Terraform 0.12.x
           - 'TF-0.12.31  TG-0.25.5'
     steps:
