@@ -10,10 +10,10 @@ IMAGE = "flaconi/atlantis-terragrunt"
 TAG = latest
 
 # Versions
-ATLANTIS = '0.18.2'
-TERRAFORM = '1.1.4'
-TERRAGRUNT = '0.36.0'
-TERRAGRUNT_ATLANTIS_CONFIG = '1.12.3'
+ATLANTIS = '0.18.3'
+TERRAFORM = '1.1.6'
+TERRAGRUNT = '0.36.2'
+TERRAGRUNT_ATLANTIS_CONFIG = '1.13.0'
 
 pull:
 	docker pull $(shell grep FROM Dockerfile | sed 's/^FROM//g' | sed "s/\$${ATLANTIS}/$(ATLANTIS)/g";)
