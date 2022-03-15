@@ -1,5 +1,5 @@
 ARG ATLANTIS
-FROM runatlantis/atlantis:v${ATLANTIS}
+FROM ghcr.io/runatlantis/atlantis:v${ATLANTIS}
 
 RUN apk add \
 	aws-cli \
