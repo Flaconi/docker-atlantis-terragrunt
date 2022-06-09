@@ -20,10 +20,10 @@ For building you can overwrite your desired versions with the following three Ma
 
 ```
 make build
-make build TERRAFORM=1.2.0
-make build TERRAFORM=1.2.0 TERRAGRUNT=0.36.12
-make build TERRAFORM=1.2.0 TERRAGRUNT=0.36.12 ATLANTIS=0.19.3
-make build TERRAFORM=1.2.0 TERRAGRUNT=0.36.12 ATLANTIS=0.19.3 TERRAGRUNT_ATLANTIS_CONFIG=1.14.2
+make build TERRAFORM=1.2.2
+make build TERRAFORM=1.2.2 TERRAGRUNT=0.36.12
+make build TERRAFORM=1.2.2 TERRAGRUNT=0.36.12 ATLANTIS=0.19.4
+make build TERRAFORM=1.2.2 TERRAGRUNT=0.36.12 ATLANTIS=0.19.4 TERRAGRUNT_ATLANTIS_CONFIG=1.14.2
 ```
 
 ## Available images
@@ -63,4 +63,4 @@ echo "${GITHUB_USER_SSH_KEY}" | base64 -d | gunzip > "${HOME}/.ssh/id_rsa"
 
 [MIT](LICENSE)
 
-Copyright (c) 2021 [Flaconi GmbH](https://github.com/Flaconi)
+Copyright (c) 2022 [Flaconi GmbH](https://github.com/Flaconi)
