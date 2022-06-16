@@ -72,5 +72,3 @@ RUN mv /usr/local/bin/docker-entrypoint.sh /usr/local/bin/docker-entrypoint-orig
 # the new docker-entrypoint.sh will do some work and then call the original entry point
 ADD data/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 ADD data/create_github_user_ssh_key.sh /usr/local/bin/create_github_user_ssh_key.sh
-# Creates directory to mount EFS
-RUN mkdir /mnt/efs
