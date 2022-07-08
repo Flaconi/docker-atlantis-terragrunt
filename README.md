@@ -50,15 +50,6 @@ flaconi/atlantis-terragrunt:<ATLANTIS_VERSION>-<TERRAFORM_VERSION>-<TERRAGRUNT_V
 flaconi/atlantis-terragrunt:<ATLANTIS_VERSION>-<TERRAFORM_VERSION>-<TERRAGRUNT_VERSION>
 ```
 
-
-## Private SSH Key
-
-This Docker entrypoint will look for env var GITHUB_USER_KEY, in case it exists, it will do the following to set a private key on the atlantis docker task.
-```
-echo "${GITHUB_USER_SSH_KEY}" | base64 -d | gunzip > "${HOME}/.ssh/id_rsa"
-```
-
-
 ## License
 
 [MIT](LICENSE)
