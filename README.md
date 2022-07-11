@@ -20,10 +20,10 @@ For building you can overwrite your desired versions with the following three Ma
 
 ```
 make build
-make build TERRAFORM=1.2.3
-make build TERRAFORM=1.2.3 TERRAGRUNT=0.38.1
-make build TERRAFORM=1.2.3 TERRAGRUNT=0.38.1 ATLANTIS=0.19.4
-make build TERRAFORM=1.2.3 TERRAGRUNT=0.38.1 ATLANTIS=0.19.4 TERRAGRUNT_ATLANTIS_CONFIG=1.14.2
+make build TERRAFORM=1.2.4
+make build TERRAFORM=1.2.4 TERRAGRUNT=0.38.4
+make build TERRAFORM=1.2.4 TERRAGRUNT=0.38.4 ATLANTIS=0.19.6
+make build TERRAFORM=1.2.4 TERRAGRUNT=0.38.4 ATLANTIS=0.19.6 TERRAGRUNT_ATLANTIS_CONFIG=1.14.2
 ```
 
 ## Available images
@@ -49,15 +49,6 @@ flaconi/atlantis-terragrunt:<ATLANTIS_VERSION>-<TERRAFORM_VERSION>-<TERRAGRUNT_V
 # On master
 flaconi/atlantis-terragrunt:<ATLANTIS_VERSION>-<TERRAFORM_VERSION>-<TERRAGRUNT_VERSION>
 ```
-
-
-## Private SSH Key
-
-This Docker entrypoint will look for env var GITHUB_USER_KEY, in case it exists, it will do the following to set a private key on the atlantis docker task.
-```
-echo "${GITHUB_USER_SSH_KEY}" | base64 -d | gunzip > "${HOME}/.ssh/id_rsa"
-```
-
 
 ## License
 
