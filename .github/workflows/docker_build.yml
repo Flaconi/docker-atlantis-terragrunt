@@ -27,7 +27,7 @@ jobs:
           - 0.19.7
         TF_TG:
           # Terraform 1.2.x
-          - 'TF-1.2.5    TG-0.38.6'
+          - 'TF-1.2.6    TG-0.38.6'
           # Terraform 1.1.x
           - 'TF-1.1.9    TG-0.38.6'
           # Terraform 1.0.x
