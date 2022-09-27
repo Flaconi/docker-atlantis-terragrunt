@@ -33,7 +33,7 @@ jobs:
           # Terraform 1.1.x
           - 'TF-1.1.9    TG-0.38.12'
           # Terraform 1.0.x
-          - 'TF-1.0.11    TG-0.38.12'
+          - 'TF-1.0.11   TG-0.38.12'
           # Terraform 0.15.x
           - 'TF-0.15.5   TG-0.38.12'
           # Terraform 0.14.x
