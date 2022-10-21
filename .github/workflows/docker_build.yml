@@ -61,11 +61,14 @@ jobs:
           TERRAGRUNT="$( echo "${TF_TG}" | awk '{print $2}' | sed 's/TG-//g' )"
 
           # Extract git tag or git branch
-          if echo "${GITHUB_REF}" | grep "refs/tags/" >/dev/null; then
+          if echo "${GITHUB_REF}" | grep -q "refs/tags/"; then
             SLUG="${GITHUB_REF/refs\/tags\//}"
           fi
-          if echo "${GITHUB_REF}" | grep "refs/heads/" >/dev/null; then
+          if echo "${GITHUB_REF}" | grep -q "refs/heads/"; then
             SLUG="${GITHUB_REF/refs\/heads\//}"
+            if echo "${SLUG}" | grep -q '^dependabot\/'; then
+              SLUG="${SLUG/dependabot\/github_actions\/actions\//dependabot-}"
+            fi
           fi
 
           # Build Docker image tag
