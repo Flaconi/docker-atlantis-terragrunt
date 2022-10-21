@@ -48,8 +48,6 @@ jobs:
       # ------------------------------------------------------------
       - name: Checkout repository
         uses: actions/checkout@v2
-        with:
-          ref: ${{ github.ref }}
 
       # ------------------------------------------------------------
       # Set Variables
