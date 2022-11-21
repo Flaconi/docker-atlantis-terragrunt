@@ -76,7 +76,7 @@ jobs:
           ATLANTIS: ${{ matrix.ATLANTIS }}
           TF_TG: ${{ matrix.TF_TG }}
 
-      - name: Build and push
+      - name: Build
         run: |
           retry() {
             for n in $(seq ${RETRIES}); do
