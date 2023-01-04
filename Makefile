@@ -28,10 +28,10 @@ build:
 		-t $(IMAGE) -f $(DIR)/$(FILE) $(DIR)
 
 test:
-	docker run --rm ${IMAGE} atlantis version | grep -E '$(ATLANTIS)$$'
-	docker run --rm ${IMAGE} terraform --version | grep -E 'v$(TERRAFORM)$$'
-	docker run --rm ${IMAGE} terragrunt --version | grep -E 'v$(TERRAGRUNT)$$'
-	docker run --rm ${IMAGE} terragrunt-atlantis-config version | grep -E "$(TERRAGRUNT_ATLANTIS_CONFIG)$$"
+	docker run --rm --entrypoint atlantis ${IMAGE} version | grep -E '$(ATLANTIS)$$'
+	docker run --rm --entrypoint terraform ${IMAGE} --version | grep -E 'v$(TERRAFORM)$$'
+	docker run --rm --entrypoint terragrunt ${IMAGE} --version | grep -E 'v$(TERRAGRUNT)$$'
+	docker run --rm --entrypoint terragrunt-atlantis-config ${IMAGE} version | grep -E "$(TERRAGRUNT_ATLANTIS_CONFIG)$$"
 
 tag:
 	docker tag $(IMAGE) $(IMAGE):$(TAG)
