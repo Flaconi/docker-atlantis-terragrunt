@@ -20,6 +20,7 @@ pull:
 
 build:
 	docker build \
+		--network=host \
 		--build-arg ATLANTIS=$(ATLANTIS) \
 		--build-arg TERRAFORM=$(TERRAFORM) \
 		--build-arg TERRAGRUNT=$(TERRAGRUNT) \
