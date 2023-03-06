@@ -10,9 +10,9 @@ IMAGE = "flaconi/atlantis-terragrunt"
 TAG = latest
 
 # Versions
-ATLANTIS = '0.22.3'
+ATLANTIS = '0.23.2'
 TERRAFORM = '1.3.9'
-TERRAGRUNT = '0.44.0'
+TERRAGRUNT = '0.44.4'
 TERRAGRUNT_ATLANTIS_CONFIG = '1.16.0'
 
 pull:
@@ -28,7 +28,7 @@ build:
 		-t $(IMAGE) -f $(DIR)/$(FILE) $(DIR)
 
 test:
-	docker run --rm --entrypoint atlantis ${IMAGE} version | grep -E '$(ATLANTIS)$$'
+	docker run --rm --entrypoint atlantis ${IMAGE} version | grep -E '^atlantis v$(ATLANTIS) '
 	docker run --rm --entrypoint terraform ${IMAGE} --version | grep -E 'v$(TERRAFORM)$$'
 	docker run --rm --entrypoint terragrunt ${IMAGE} --version | grep -E 'v$(TERRAGRUNT)$$'
 	docker run --rm --entrypoint terragrunt-atlantis-config ${IMAGE} version | grep -E "$(TERRAGRUNT_ATLANTIS_CONFIG)$$"
