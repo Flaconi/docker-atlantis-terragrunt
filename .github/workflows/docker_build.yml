@@ -15,18 +15,18 @@ jobs:
       fail-fast: false
       matrix:
         ATLANTIS:
-          - 0.23.2
+          - 0.23.3
         TF_TG:
           # Terraform 1.4.x
-          - 'TF-1.4.2    TG-0.44.5'
+          - 'TF-1.4.2    TG-0.45.0'
           # Terraform 1.3.x
-          - 'TF-1.3.9    TG-0.44.5'
+          - 'TF-1.3.9    TG-0.45.0'
           # Terraform 1.2.x
-          - 'TF-1.2.9    TG-0.44.5'
+          - 'TF-1.2.9    TG-0.45.0'
           # Terraform 1.1.x
-          - 'TF-1.1.9    TG-0.44.5'
+          - 'TF-1.1.9    TG-0.45.0'
           # Terraform 1.0.x
-          - 'TF-1.0.11   TG-0.44.5'
+          - 'TF-1.0.11   TG-0.45.0'
 
     steps:
       - name: Checkout repository
