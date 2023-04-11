@@ -25,15 +25,14 @@ RUN set -eux \
 			| tail -1 \
 		)"; \
 	fi \
-	&& if [ ! -d "/usr/local/bin/tf/versions/${TERRAFORM}" ]; then \
-		mkdir "/usr/local/bin/tf/versions/${TERRAFORM}" \
-		&& cd "/usr/local/bin/tf/versions/${TERRAFORM}" \
+	&& if ! terraform version | grep -qE " v${TERRAFORM}\$"; then \
+		cd "/tmp" \
 		&& curl -sS "https://releases.hashicorp.com/terraform/${TERRAFORM}/terraform_${TERRAFORM}_linux_amd64.zip" -o terraform.zip \
 		&& unzip terraform.zip \
 		&& rm terraform.zip \
-		&& chmod +x terraform; \
+		&& chmod +x terraform \
+		&& mv terraform /usr/local/bin/terraform; \
 	fi \
-	&& ln -sf "/usr/local/bin/tf/versions/${TERRAFORM}/terraform" /usr/local/bin/terraform \
 	&& terraform --version | grep "v${TERRAFORM}"
 
 ###
