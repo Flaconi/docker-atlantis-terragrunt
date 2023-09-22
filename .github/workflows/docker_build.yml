@@ -18,17 +18,17 @@ jobs:
           - 0.25.0
         TF_TG:
           # Terraform 1.5.x
-          - 'TF-1.5.7    TG-0.50.14'
+          - 'TF-1.5.7    TG-0.51.4'
           # Terraform 1.4.x
-          - 'TF-1.4.6    TG-0.50.14'
+          - 'TF-1.4.6    TG-0.51.4'
           # Terraform 1.3.x
-          - 'TF-1.3.9    TG-0.50.14'
+          - 'TF-1.3.9    TG-0.51.4'
           # Terraform 1.2.x
-          - 'TF-1.2.9    TG-0.50.14'
+          - 'TF-1.2.9    TG-0.51.4'
           # Terraform 1.1.x
-          - 'TF-1.1.9    TG-0.50.14'
+          - 'TF-1.1.9    TG-0.51.4'
           # Terraform 1.0.x
-          - 'TF-1.0.11   TG-0.50.14'
+          - 'TF-1.0.11   TG-0.51.4'
 
     steps:
       - name: Checkout repository
