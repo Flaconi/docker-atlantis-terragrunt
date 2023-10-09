@@ -10,9 +10,9 @@ IMAGE = "flaconi/atlantis-terragrunt"
 TAG = latest
 
 # Versions
-ATLANTIS = '0.25.0'
-TERRAFORM = '1.5.7'
-TERRAGRUNT = '0.51.6'
+ATLANTIS = '0.26.0'
+TERRAFORM = '1.6.0'
+TERRAGRUNT = '0.52.1'
 TERRAGRUNT_ATLANTIS_CONFIG = '1.16.0'
 
 pull:
