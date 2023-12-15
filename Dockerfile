@@ -1,6 +1,7 @@
 ARG ATLANTIS
 FROM ghcr.io/runatlantis/atlantis:v${ATLANTIS}
 
+USER root
 RUN apk add \
 	aws-cli \
 	curl \
@@ -64,3 +65,5 @@ RUN set -eux \
 	&& mv terragrunt-atlantis-config_${TERRAGRUNT_ATLANTIS_CONFIG}_linux_amd64/terragrunt-atlantis-config_${TERRAGRUNT_ATLANTIS_CONFIG}_linux_amd64 terragrunt-atlantis-config \
 	&& chmod +x terragrunt-atlantis-config \
 	&& rm -rf terragrunt-atlantis-config_${TERRAGRUNT_ATLANTIS_CONFIG}_linux_amd64*
+
+USER atlantis
