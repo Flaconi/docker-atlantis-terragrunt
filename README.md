@@ -17,6 +17,7 @@ For building you can overwrite your desired versions with the following three Ma
 * `TERRAFORM`
 * `TERRAGRUNT`
 * `TERRAGRUNT_ATLANTIS_CONFIG`
+* `ONE_PASSWORD_CLI`
 
 ```
 make build
@@ -24,6 +25,7 @@ make build TERRAFORM=1.6.6
 make build TERRAFORM=1.6.6 TERRAGRUNT=0.54.4
 make build TERRAFORM=1.6.6 TERRAGRUNT=0.54.4 ATLANTIS=0.27.0
 make build TERRAFORM=1.6.6 TERRAGRUNT=0.54.4 ATLANTIS=0.27.0 TERRAGRUNT_ATLANTIS_CONFIG=1.16.0
+make build TERRAFORM=1.6.6 TERRAGRUNT=0.54.4 ATLANTIS=0.27.0 TERRAGRUNT_ATLANTIS_CONFIG=1.16.0 ONE_PASSWORD_CLI=2.24.0
 ```
 
 ## Available images

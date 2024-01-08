@@ -14,6 +14,7 @@ ATLANTIS = '0.27.0'
 TERRAFORM = '1.6.6'
 TERRAGRUNT = '0.54.4'
 TERRAGRUNT_ATLANTIS_CONFIG = '1.16.0'
+ONE_PASSWORD_CLI = '2.24.0'
 
 pull:
 	docker pull $(shell grep FROM Dockerfile | sed 's/^FROM//g' | sed "s/\$${ATLANTIS}/$(ATLANTIS)/g";)
@@ -25,6 +26,7 @@ build:
 		--build-arg TERRAFORM=$(TERRAFORM) \
 		--build-arg TERRAGRUNT=$(TERRAGRUNT) \
 		--build-arg TERRAGRUNT_ATLANTIS_CONFIG=$(TERRAGRUNT_ATLANTIS_CONFIG) \
+		--build-arg ONE_PASSWORD_CLI=$(ONE_PASSWORD_CLI) \
 		-t $(IMAGE) -f $(DIR)/$(FILE) $(DIR)
 
 test:
@@ -32,6 +34,7 @@ test:
 	docker run --rm --entrypoint terraform ${IMAGE} --version | grep -E 'v$(TERRAFORM)$$'
 	docker run --rm --entrypoint terragrunt ${IMAGE} --version | grep -E 'v$(TERRAGRUNT)$$'
 	docker run --rm --entrypoint terragrunt-atlantis-config ${IMAGE} version | grep -E "$(TERRAGRUNT_ATLANTIS_CONFIG)$$"
+	docker run --rm --entrypoint op ${IMAGE} --version | grep -E '$(ONE_PASSWORD_CLI)$$'
 
 tag:
 	docker tag $(IMAGE) $(IMAGE):$(TAG)

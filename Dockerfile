@@ -12,6 +12,7 @@ RUN apk add \
 ARG TERRAGRUNT
 ARG TERRAFORM
 ARG TERRAGRUNT_ATLANTIS_CONFIG
+ARG ONE_PASSWORD_CLI
 
 ###
 ### Ensure Terraform version is present, linked and validated
@@ -65,5 +66,27 @@ RUN set -eux \
 	&& mv terragrunt-atlantis-config_${TERRAGRUNT_ATLANTIS_CONFIG}_linux_amd64/terragrunt-atlantis-config_${TERRAGRUNT_ATLANTIS_CONFIG}_linux_amd64 terragrunt-atlantis-config \
 	&& chmod +x terragrunt-atlantis-config \
 	&& rm -rf terragrunt-atlantis-config_${TERRAGRUNT_ATLANTIS_CONFIG}_linux_amd64*
+
+
+###
+### Ensure 1Password CLI version is present, linked and validated
+###
+RUN set -eux \
+	&& if [ "${ONE_PASSWORD_CLI}" = "latest" ]; then \
+		ONE_PASSWORD_CLI="$( \
+			curl -sS  https://app-updates.agilebits.com/product_history/CLI2 \
+			| grep -Eo '"/dist/1P/op2/pkg/v?[0-9]+\.[0-9]+\.[0-9]+/op_linux_amd64"' \
+			| grep -Eo '[0-9]+\.[0-9]+\.[0-9]+' \
+			| sort -V \
+			| tail -1 \
+		)"; \
+	fi \
+	&& cd "/tmp" \
+    && curl -sS "https://cache.agilebits.com/dist/1P/op2/pkg/v${ONE_PASSWORD_CLI}/op_linux_amd64_v${ONE_PASSWORD_CLI}.zip" -o op.zip \
+    && unzip op.zip \
+    && rm op.zip \
+    && chmod +x op \
+    && mv op /usr/local/bin/op \
+    && op --version | grep "${ONE_PASSWORD_CLI}"
 
 USER atlantis
