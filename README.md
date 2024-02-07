@@ -23,10 +23,10 @@ For building you can overwrite your desired versions with the following three Ma
 e.g.
 ```
 make build
-make build TERRAFORM=1.7.1
-make build TERRAFORM=1.7.1 TERRAGRUNT=0.54.22
-make build TERRAFORM=1.7.1 TERRAGRUNT=0.54.22 ATLANTIS=0.27.1
-make build TERRAFORM=1.7.1 TERRAGRUNT=0.54.22 ATLANTIS=0.27.1 SOPS=3.8.1
+make build TERRAFORM=1.7.2
+make build TERRAFORM=1.7.2 TERRAGRUNT=0.55.1
+make build TERRAFORM=1.7.2 TERRAGRUNT=0.55.1 ATLANTIS=0.27.1
+make build TERRAFORM=1.7.2 TERRAGRUNT=0.55.1 ATLANTIS=0.27.1 SOPS=3.8.1
 ```
 
 ## Available images
@@ -57,4 +57,4 @@ flaconi/atlantis-terragrunt:<ATLANTIS_VERSION>-<TERRAFORM_VERSION>-<TERRAGRUNT_V
 
 [MIT](LICENSE)
 
-Copyright (c) 2023 [Flaconi GmbH](https://github.com/Flaconi)
+Copyright (c) 2024 [Flaconi GmbH](https://github.com/Flaconi)
