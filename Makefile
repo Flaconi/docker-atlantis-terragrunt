@@ -14,6 +14,7 @@ ATLANTIS = '0.27.1'
 TERRAFORM = '1.7.1'
 TERRAGRUNT = '0.54.22'
 TERRAGRUNT_ATLANTIS_CONFIG = '1.16.0'
+SOPS = '3.8.1'
 ONE_PASSWORD_CLI = '2.24.0'
 
 pull:
@@ -26,6 +27,7 @@ build:
 		--build-arg TERRAFORM=$(TERRAFORM) \
 		--build-arg TERRAGRUNT=$(TERRAGRUNT) \
 		--build-arg TERRAGRUNT_ATLANTIS_CONFIG=$(TERRAGRUNT_ATLANTIS_CONFIG) \
+		--build-arg SOPS=$(SOPS) \
 		--build-arg ONE_PASSWORD_CLI=$(ONE_PASSWORD_CLI) \
 		-t $(IMAGE) -f $(DIR)/$(FILE) $(DIR)
 
@@ -34,6 +36,7 @@ test:
 	docker run --rm --entrypoint terraform ${IMAGE} --version | grep -E 'v$(TERRAFORM)$$'
 	docker run --rm --entrypoint terragrunt ${IMAGE} --version | grep -E 'v$(TERRAGRUNT)$$'
 	docker run --rm --entrypoint terragrunt-atlantis-config ${IMAGE} version | grep -E "$(TERRAGRUNT_ATLANTIS_CONFIG)$$"
+	docker run --rm --entrypoint sops ${IMAGE} --version --disable-version-check | grep -E '^sops $(SOPS)$$'
 	docker run --rm --entrypoint op ${IMAGE} --version | grep -E '$(ONE_PASSWORD_CLI)$$'
 
 tag:
