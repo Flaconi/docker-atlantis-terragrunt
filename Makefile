@@ -35,7 +35,7 @@ test:
 	docker run --rm --entrypoint atlantis ${IMAGE} version | grep -E '^atlantis v$(ATLANTIS) '
 	docker run --rm --entrypoint terraform ${IMAGE} --version | grep -E 'v$(TERRAFORM)$$'
 	docker run --rm --entrypoint terragrunt ${IMAGE} --version | grep -E 'v$(TERRAGRUNT)$$'
-	docker run --rm --entrypoint terragrunt-atlantis-config ${IMAGE} version | grep -E "$(TERRAGRUNT_ATLANTIS_CONFIG)$$"
+	docker run --rm --entrypoint terragrunt-atlantis-config ${IMAGE} version | grep -E '$(TERRAGRUNT_ATLANTIS_CONFIG)$$'
 	docker run --rm --entrypoint sops ${IMAGE} --version --disable-version-check | grep -E '^sops $(SOPS)$$'
 	docker run --rm --entrypoint op ${IMAGE} --version | grep -E '$(ONE_PASSWORD_CLI)$$'
 
