@@ -12,10 +12,10 @@ TAG = latest
 # Versions
 ATLANTIS = '0.27.3'
 TERRAFORM = '1.8.2'
-TERRAGRUNT = '0.57.9'
+TERRAGRUNT = '0.58.3'
 TERRAGRUNT_ATLANTIS_CONFIG = '1.17.4'
 SOPS = '3.8.1'
-ONE_PASSWORD_CLI = '2.27.0'
+ONE_PASSWORD_CLI = '2.28.0'
 
 pull:
 	docker pull $(shell grep FROM Dockerfile | sed 's/^FROM//g' | sed "s/\$${ATLANTIS}/$(ATLANTIS)/g";)
