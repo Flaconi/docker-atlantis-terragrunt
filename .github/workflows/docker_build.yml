@@ -15,10 +15,10 @@ jobs:
       fail-fast: false
       matrix:
         ATLANTIS:
-          - 0.29.0
+          - 0.30.0
         TF_TG:
           # Terraform 1.9.x
-          - 'TF-1.9.5    TG-0.63.8'
+          - 'TF-1.9.7    TG-0.63.8'
           # Terraform 1.8.x
           - 'TF-1.8.5    TG-0.63.8'
           # Terraform 1.7.x
