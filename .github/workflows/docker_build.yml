@@ -41,7 +41,7 @@ jobs:
           fi
 
           # Build Docker image tag
-          TAG="${ATLANTIS}-${TERRAFORM}-${TERRAGRUNT}-ro"
+          TAG="${ATLANTIS}-${TERRAFORM}-${TERRAGRUNT}-tmp"
 
           # Output for debugging
           echo "ATLANTIS=${ATLANTIS}"

@@ -107,16 +107,7 @@ RUN set -eux \
     && mv op /usr/local/bin/op \
     && op --version | grep "${ONE_PASSWORD_CLI}"
 
-RUN cd / \
-  && git init \
-  && git config user.email "devops@flaconi.de" \
-  && git config user.name "DevOps Team" \
-  && git config init.defaultBranch main \
-  && git config advice.addIgnoredFile false \
-  && echo "/dev" > .gitignore \
-  && echo "/proc" >> .gitignore \
-  && echo "/sys" >> .gitignore \
-  && git add * || git add $(find -maxdepth 1 -type f) \
-  && git commit -am "Initial state"
+RUN mkdir -p /docker-entrypoint.d/
+COPY docker-entrypoint.d/* /docker-entrypoint.d/
 
 USER atlantis
