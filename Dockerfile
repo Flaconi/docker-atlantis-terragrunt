@@ -105,6 +105,7 @@ RUN set -eux \
     && rm op.zip \
     && chmod +x op \
     && mv op /usr/local/bin/op \
+    && rm -rf /tmp/* \
     && op --version | grep "${ONE_PASSWORD_CLI}"
 
 USER atlantis
