@@ -23,10 +23,10 @@ For building you can overwrite your desired versions with the following three Ma
 e.g.
 ```
 make build
-make build TERRAFORM=1.12.2
-make build TERRAFORM=1.12.2 TERRAGRUNT=0.82.3
-make build TERRAFORM=1.12.2 TERRAGRUNT=0.82.3 ATLANTIS=0.35.0
-make build TERRAFORM=1.12.2 TERRAGRUNT=0.82.3 ATLANTIS=0.35.0 SOPS=3.10.2
+make build TERRAFORM=1.13.3
+make build TERRAFORM=1.13.3 TERRAGRUNT=0.86.2
+make build TERRAFORM=1.13.3 TERRAGRUNT=0.86.2 ATLANTIS=0.36.0
+make build TERRAFORM=1.13.3 TERRAGRUNT=0.86.2 ATLANTIS=0.36.0 SOPS=3.10.2
 ```
 
 ## Available images
