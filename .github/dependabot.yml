@@ -1,5 +1,37 @@
 version: 2
+registries:
+  npm-npmjs:
+    type: npm-registry
+    url: https://registry.npmjs.org
+    replaces-base: true
+    token: ${{ secrets.NPM_TOKEN }}
+  github-flaconi-ci:
+    type: git
+    url: https://github.com
+    username: x-access-token
+    password: ${{secrets.REPO_READ_TOKEN}}
 updates:
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: daily
+      time: "08:00"
+      timezone: Europe/Berlin
+    open-pull-requests-limit: 10
+    registries:
+      - npm-npmjs
+    ignore:
+      - dependency-name: "node-fetch"
+        versions: ["3.x"]
+    groups:
+      production:
+        dependency-type: production
+        update-types: [minor, patch]
+      production-major:
+        dependency-type: production
+        update-types: [major]
+      development:
+        dependency-type: development
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
@@ -7,3 +39,5 @@ updates:
       day: monday
       time: "08:00"
       timezone: Europe/Berlin
+    registries:
+      - github-flaconi-ci
