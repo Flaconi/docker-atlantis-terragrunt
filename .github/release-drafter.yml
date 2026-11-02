@@ -1,24 +1,41 @@
 # Configuration for Release Drafter: https://github.com/toolmantim/release-drafter
-name-template: '$NEXT_PATCH_VERSION 🌈'
-tag-template: '$NEXT_PATCH_VERSION'
+name-template: 'v$RESOLVED_VERSION 🌈'
+tag-template: 'v$RESOLVED_VERSION'
+
 categories:
   - title: '🚀 Features'
-    labels:
-      - feature
-      - enhancement
+    semver-increment: minor
+    when:
+      labels:
+        - feature
+        - enhancement
   - title: '🐛 Bug Fixes'
-    labels:
-      - fix
-      - bugfix
-      - bug
+    when:
+      labels:
+        - fix
+        - bugfix
+        - bug
   - title: '🧰 Maintenance'
-    labels:
-      - chore
-      - dependencies
-change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
-branches:
-  - master
+    when:
+      labels:
+        - chore
+        - dependencies
+  - type: pre-exclude
+    when:
+      label: skip-changelog
+  - type: version-resolver
+    semver-increment: major
+    when:
+      label: major
+  - type: version-resolver
+    semver-increment: patch   # fallback when nothing else matches
+
+change-template: '- $TITLE (#$NUMBER) $AUTHORS'
+change-title-escapes: '\<*_&'
+
 template: |
   ## What's Changed
 
   $CHANGES
+  
+  **Full Changelog**: https://github.com/$OWNER/$REPOSITORY/compare/$PREVIOUS_TAG...v$RESOLVED_VERSION
